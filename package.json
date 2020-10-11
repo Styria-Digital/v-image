@@ -1,0 +1,59 @@
+{
+    "name": "v-image",
+    "version": "1.0.0",
+    "description": "Vue.js plugin for img and picture HTML elements with support for native lazy loading, and lazy loading using intersection observer",
+    "main": "dist/v-image.umd.js",
+    "module": "dist/v-image.esm.js",
+    "unpkg": "dist/v-image.min.js",
+    "browser": {
+        "./sfc": "src/v-image.vue"
+    },
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-image.umd.js",
+        "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-image.esm.js",
+        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-image.min.js",
+        "lint": "vue-cli-service lint"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marko-matic/v-image.git"
+    },
+    "keywords": [
+        "vue",
+        "vuejs",
+        "vue.js",
+        "image",
+        "picture",
+        "lazy",
+        "lazy loading"
+    ],
+    "author": "Styria Digital / Marko Matic",
+    "license": "SEE LICENSE IN LICENSE",
+    "bugs": {
+        "url": "https://github.com/marko-matic/v-image/issues"
+    },
+    "homepage": "https://github.com/marko-matic/v-image",
+    "dependencies": {
+        "core-js": "^3.6.5",
+        "rollup": "^1.32.1",
+        "@rollup/plugin-buble": "^0.21.3",
+        "@rollup/plugin-commonjs": "^11.1.0",
+        "rollup-plugin-vue": "^5.1.9",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.7",
+        "@vue/cli-plugin-eslint": "~4.5.7",
+        "@vue/cli-service": "~4.5.7",
+        "@vue/eslint-config-airbnb": "^5.1.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.8.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-vue": "^6.2.2",
+        "vue-template-compiler": "^2.6.12"
+    }
+}
