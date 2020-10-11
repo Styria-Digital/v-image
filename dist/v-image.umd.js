@@ -28,11 +28,6 @@
     //
     //
     //
-    //
-    //
-    //
-    //
-    //
 
     var script = {
         name: 'vImage',
@@ -43,7 +38,8 @@
                 required: true
             },
             srcPlaceholder: {
-                type: String
+                type: String,
+                default: ''
             },
             alt: {
                 type: String
@@ -195,12 +191,11 @@
             ],
             2
           )
-        : !_vm.imageLoaded && _vm.srcPlaceholder
-        ? _c("img", { attrs: { src: _vm.srcPlaceholder, alt: _vm.alt } })
         : _c("img", {
             class: { "is-loaded": this.imageLoaded },
             attrs: {
               src: _vm.src,
+              srcset: _vm.srcPlaceholder,
               alt: _vm.alt,
               loading: this.nativeLazy ? "lazy" : ""
             },

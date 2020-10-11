@@ -10,14 +10,9 @@
     </picture>
 
     <img
-        v-else-if="!imageLoaded && srcPlaceholder"
-        :src="srcPlaceholder"
-        :alt="alt"
-    >
-
-    <img
         v-else
         :src="src"
+        :srcset="srcPlaceholder"
         :alt="alt"
         :loading="this.nativeLazy ? 'lazy' : ''"
         :class="{ 'is-loaded': this.imageLoaded }"
@@ -37,7 +32,8 @@ export default {
             required: true
         },
         srcPlaceholder: {
-            type: String
+            type: String,
+            default: ''
         },
         alt: {
             type: String
