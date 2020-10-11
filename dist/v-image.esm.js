@@ -21,7 +21,6 @@
 //
 //
 //
-//
 
 var script = {
     name: 'vImage',
@@ -55,12 +54,21 @@ var script = {
         imageLoaded: false
     }); },
 
+    computed: {
+        imageSrc: function imageSrc () {
+            return this.intersected && this.src ? this.src : this.srcPlaceholder;
+        }
+    },
+
     methods: {
         load: function load () {
-            this.imageLoaded = true;
+            if (this.$el.getAttribute('src') !== this.srcPlaceholder) {
+                this.imageLoaded = true;
+                this.$emit('load');
+            }
         },
         error: function error () {
-            console.log('ERROR');
+            this.$emit('error');
         }
     },
 
@@ -70,7 +78,6 @@ var script = {
         if ('loading' in HTMLImageElement.prototype) {
             this.nativeLazy = true;
         } else if ('IntersectionObserver' in window) {
-            console.log('TEST vImage: ', typeof this.intersectionOptions, this.intersectionOptions);
             this.observer = new IntersectionObserver(function (entries) {
                 var image = entries[0];
                 if (image.isIntersecting) {
@@ -188,8 +195,7 @@ var __vue_render__ = function() {
     : _c("img", {
         class: { "is-loaded": this.imageLoaded },
         attrs: {
-          src: _vm.src,
-          srcset: _vm.srcPlaceholder,
+          src: _vm.imageSrc,
           alt: _vm.alt,
           loading: this.nativeLazy ? "lazy" : ""
         },

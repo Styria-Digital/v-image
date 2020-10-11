@@ -11,8 +11,7 @@
 
     <img
         v-else
-        :src="src"
-        :srcset="srcPlaceholder"
+        :src="imageSrc"
         :alt="alt"
         :loading="this.nativeLazy ? 'lazy' : ''"
         :class="{ 'is-loaded': this.imageLoaded }"
@@ -55,12 +54,21 @@ export default {
         imageLoaded: false
     }),
 
+    computed: {
+        imageSrc () {
+            return this.intersected && this.src ? this.src : this.srcPlaceholder;
+        }
+    },
+
     methods: {
         load () {
-            this.imageLoaded = true;
+            if (this.$el.getAttribute('src') !== this.srcPlaceholder) {
+                this.imageLoaded = true;
+                this.$emit('load');
+            }
         },
         error () {
-            console.log('ERROR');
+            this.$emit('error');
         }
     },
 
@@ -68,7 +76,6 @@ export default {
         if ('loading' in HTMLImageElement.prototype) {
             this.nativeLazy = true;
         } else if ('IntersectionObserver' in window) {
-            console.log('TEST vImage: ', typeof this.intersectionOptions, this.intersectionOptions);
             this.observer = new IntersectionObserver(entries => {
                 const image = entries[0];
                 if (image.isIntersecting) {
