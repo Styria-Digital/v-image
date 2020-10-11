@@ -10,6 +10,12 @@
     </picture>
 
     <img
+        v-else-if="!imageLoaded && srcPlaceholder"
+        :src="srcPlaceholder"
+        :alt="alt"
+    >
+
+    <img
         v-else
         :src="src"
         :alt="alt"

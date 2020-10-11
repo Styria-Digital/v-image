@@ -27,6 +27,12 @@
     //
     //
     //
+    //
+    //
+    //
+    //
+    //
+    //
 
     var script = {
         name: 'vImage',
@@ -189,6 +195,8 @@
             ],
             2
           )
+        : !_vm.imageLoaded && _vm.srcPlaceholder
+        ? _c("img", { attrs: { src: _vm.srcPlaceholder, alt: _vm.alt } })
         : _c("img", {
             class: { "is-loaded": this.imageLoaded },
             attrs: {
