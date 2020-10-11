@@ -2,14 +2,79 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 var script = {
     name: 'vImage',
 
+    inheritAttrs: false,
+
     props: {
-        title: {
+        src: {
             type: String,
-            required: true
+            required: true,
+        },
+        srcPlaceholder: {
+            type: String,
+            default: 'data:,'
+        },
+        srcset: {
+            type: String
+        },
+        intersectionOptions: {
+            type: Object,
+            default: function () {}
+        },
+        usePicture: {
+            type: Boolean,
+            default: false
+        },
+        alt: {
+            type: String
+        }
+    },
+
+    data: function () { return ({
+        observer: null,
+        intersected: false,
+        nativeLazy: false
+    }); },
+
+    methods: {
+        load: function load () {
+            console.log('LOADED');
+        },
+        error: function error () {
+            console.log('ERROR');
+        }
+    },
+
+    created: function created () {
+        var this$1 = this;
+
+        if ('loading' in HTMLImageElement.prototype) {
+            this.nativeLazy = true;
+        } else if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver(function (entries) {
+                var image = entries[0];
+                if (image.isIntersecting) {
+                    this$1.intersected = true;
+                    this$1.observer.disconnect();
+                    this$1.$emit('intersect');
+                }
+            }, this.intersectionOptions);
+            this.observer.observe(this.$el);
+        }
+    },
+    destroyed: function destroyed() {
+        if (!this.nativeLazy && 'IntersectionObserver' in window) {
+            this.observer.disconnect();
         }
     }
 };
@@ -97,7 +162,15 @@ var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("h1", [_vm._v("neki title")])
+  return _c("img", {
+    staticClass: "v-image",
+    attrs: {
+      src: _vm.src,
+      alt: _vm.alt,
+      loading: this.nativeLazy ? "lazy" : ""
+    },
+    on: { load: _vm.load, error: _vm.error }
+  })
 };
 var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
