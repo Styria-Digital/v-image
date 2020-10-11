@@ -56,7 +56,9 @@ export default {
 
     computed: {
         imageSrc () {
-            return this.intersected && this.src ? this.src : this.srcPlaceholder;
+            return this.nativeLazy
+                ? this.src
+                : this.intersected && this.src ? this.src : this.srcPlaceholder;
         }
     },
 
