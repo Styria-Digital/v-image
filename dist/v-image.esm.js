@@ -56,7 +56,9 @@ var script = {
 
     computed: {
         imageSrc: function imageSrc () {
-            return this.intersected && this.src ? this.src : this.srcPlaceholder;
+            return this.nativeLazy
+                ? this.src
+                : this.intersected && this.src ? this.src : this.srcPlaceholder;
         }
     },
 
