@@ -190,12 +190,7 @@ var __vue_render__ = function() {
           alt: _vm.alt,
           loading: this.nativeLazy ? "lazy" : ""
         },
-        on: { load: _vm.load },
-        nativeOn: {
-          error: function($event) {
-            return _vm.error($event)
-          }
-        }
+        on: { load: _vm.load, error: _vm.error }
       })
 };
 var __vue_staticRenderFns__ = [];

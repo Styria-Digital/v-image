@@ -16,7 +16,7 @@
         :loading="this.nativeLazy ? 'lazy' : ''"
         :class="{ 'is-loaded': this.imageLoaded }"
         @load="load"
-        @error.native="error"
+        @error="error"
     >
 
 </template>
