@@ -9,22 +9,31 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script = {
     name: 'vImage',
 
-    inheritAttrs: false,
-
     props: {
         src: {
             type: String,
-            required: true,
+            required: true
         },
         srcPlaceholder: {
-            type: String,
-            default: 'data:,'
+            type: String
         },
-        srcset: {
+        alt: {
             type: String
         },
         intersectionOptions: {
@@ -34,33 +43,32 @@ var script = {
         usePicture: {
             type: Boolean,
             default: false
-        },
-        alt: {
-            type: String
         }
     },
 
     data: function () { return ({
         observer: null,
         intersected: false,
-        nativeLazy: false
+        nativeLazy: false,
+        imageLoaded: false
     }); },
 
     methods: {
         load: function load () {
-            console.log('LOADED');
+            this.imageLoaded = true;
         },
         error: function error () {
             console.log('ERROR');
         }
     },
 
-    created: function created () {
+    mounted: function mounted () {
         var this$1 = this;
 
         if ('loading' in HTMLImageElement.prototype) {
             this.nativeLazy = true;
         } else if ('IntersectionObserver' in window) {
+            console.log('TEST vImage: ', typeof this.intersectionOptions, this.intersectionOptions);
             this.observer = new IntersectionObserver(function (entries) {
                 var image = entries[0];
                 if (image.isIntersecting) {
@@ -72,7 +80,8 @@ var script = {
             this.observer.observe(this.$el);
         }
     },
-    destroyed: function destroyed() {
+
+    destroyed: function destroyed () {
         if (!this.nativeLazy && 'IntersectionObserver' in window) {
             this.observer.disconnect();
         }
@@ -162,15 +171,32 @@ var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("img", {
-    staticClass: "v-image",
-    attrs: {
-      src: _vm.src,
-      alt: _vm.alt,
-      loading: this.nativeLazy ? "lazy" : ""
-    },
-    on: { load: _vm.load, error: _vm.error }
-  })
+  return _vm.usePicture
+    ? _c(
+        "picture",
+        [
+          _vm._t("default"),
+          _vm._v(" "),
+          !_vm.imageLoaded
+            ? _c("img", { attrs: { src: _vm.srcPlaceholder, alt: _vm.alt } })
+            : _vm._e()
+        ],
+        2
+      )
+    : _c("img", {
+        class: { "is-loaded": this.imageLoaded },
+        attrs: {
+          src: _vm.src,
+          alt: _vm.alt,
+          loading: this.nativeLazy ? "lazy" : ""
+        },
+        on: { load: _vm.load },
+        nativeOn: {
+          error: function($event) {
+            return _vm.error($event)
+          }
+        }
+      })
 };
 var __vue_staticRenderFns__ = [];
 __vue_render__._withStripped = true;
@@ -216,14 +242,18 @@ var plugin = {
 
 
 var GlobalVue = null;
+
 if (typeof window !== 'undefined') {
     GlobalVue = window.Vue;
 } else if (typeof global !== 'undefined') {
     GlobalVue = global.Vue;
 }
+
 if (GlobalVue) {
     GlobalVue.use(plugin);
 }
 
+
+__vue_component__.install = install;
+
 export default __vue_component__;
-export { install };

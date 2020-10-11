@@ -1,30 +1,39 @@
 <template>
+
+    <picture v-if="usePicture">
+        <slot />
+        <img
+            v-if="!imageLoaded"
+            :src="srcPlaceholder"
+            :alt="alt"
+        >
+    </picture>
+
     <img
-        class="v-image"
+        v-else
         :src="src"
         :alt="alt"
         :loading="this.nativeLazy ? 'lazy' : ''"
+        :class="{ 'is-loaded': this.imageLoaded }"
         @load="load"
-        @error="error"
-    />
+        @error.native="error"
+    >
+
 </template>
 
 <script>
 export default {
     name: 'vImage',
 
-    inheritAttrs: false,
-
     props: {
         src: {
             type: String,
-            required: true,
+            required: true
         },
         srcPlaceholder: {
-            type: String,
-            default: 'data:,'
+            type: String
         },
-        srcset: {
+        alt: {
             type: String
         },
         intersectionOptions: {
@@ -34,31 +43,30 @@ export default {
         usePicture: {
             type: Boolean,
             default: false
-        },
-        alt: {
-            type: String
         }
     },
 
     data: () => ({
         observer: null,
         intersected: false,
-        nativeLazy: false
+        nativeLazy: false,
+        imageLoaded: false
     }),
 
     methods: {
         load () {
-            console.log('LOADED');
+            this.imageLoaded = true;
         },
         error () {
             console.log('ERROR');
         }
     },
 
-    created () {
+    mounted () {
         if ('loading' in HTMLImageElement.prototype) {
             this.nativeLazy = true;
         } else if ('IntersectionObserver' in window) {
+            console.log('TEST vImage: ', typeof this.intersectionOptions, this.intersectionOptions);
             this.observer = new IntersectionObserver(entries => {
                 const image = entries[0];
                 if (image.isIntersecting) {
@@ -70,7 +78,8 @@ export default {
             this.observer.observe(this.$el);
         }
     },
-    destroyed() {
+
+    destroyed () {
         if (!this.nativeLazy && 'IntersectionObserver' in window) {
             this.observer.disconnect();
         }
