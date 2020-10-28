@@ -52,8 +52,8 @@ When the `src` image is loaded, a `is-loaded` class is added, so you can use it 
 ```html
 <template>
   <v-image
-    src="https://cdn-images-1.medium.com/max/1600/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
-    src-placeholder="https://cdn-images-1.medium.com/max/80/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
+    src="http://lorempixel.com/400/200/"
+    src-placeholder="http://lorempixel.com/200/200/"
   />
 </template>
 
@@ -71,7 +71,7 @@ When the `src` image is loaded, a `is-loaded` class is added, so you can use it 
 In case you are using Webpack bundler for images too (just like Vue-cli):
 ```html
 <v-image
-  src="https://cdn-images-1.medium.com/max/1600/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
+  src="http://lorempixel.com/400/200/"
   :src-placeholder="require('../assets/img.jpg')"
 />
 ```
@@ -81,8 +81,8 @@ You could listen to the `intersect` and `load` events for more complex animation
 ```html
 <template>
   <v-image
-    src="https://cdn-images-1.medium.com/max/1600/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
-    src-placeholder="https://cdn-images-1.medium.com/max/80/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
+    src="http://lorempixel.com/400/200/"
+    src-placeholder="http://lorempixel.com/200/200/"
     @intersect="..."
     @load="..."
   />
@@ -97,11 +97,11 @@ If you want to wrap the `img` in a `picture` tag, use the prop `usePicture`. You
 
 ```html
 <v-image
-  src="https://cdn-images-1.medium.com/max/1600/1*xjGrvQSXvj72W4zD6IWzfg.jpeg"
+  src="http://lorempixel.com/400/200/"
   alt="Fallback"
   use-picture
 >
-  <source srcset="image-320w.jpg 320w, image-480w.jpg 480w" />
+  <source srcset="http://lorempixel.com/1680/1024/" media="(min-width: 1024px)" />
 </v-image>
 
 ```
@@ -110,8 +110,8 @@ Renders as:
 
 ```html
 <picture>
-  <source srcset="image-320w.jpg 320w, image-480w.jpg 480w" />
-  <img srcset="https://cdn-images-1.medium.com/max/1600/1*xjGrvQSXvj72W4zD6IWzfg.jpeg" alt="Fallback" />
+  <source srcset="http://lorempixel.com/1680/1024/" media="(min-width: 1024px)" />
+  <img srcset="http://lorempixel.com/400/200/" alt="Fallback" />
 </picture>
 ```
 
