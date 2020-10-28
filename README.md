@@ -4,6 +4,12 @@ A Vue.js component to lazy load an image automatically when it enters the viewpo
 
 Plugin is inspired by [v-lazy-image](https://github.com/alexjoverm/v-lazy-image).
 
+## Lazy Loading at the Browser-Level
+
+v-image is detects support for browser-level lazy loading and uses it as default. If browser-level lazy loading is not supported by browser fallback is Intersection Observer.
+
+More information on: https://web.dev/native-lazy-loading/
+
 ## Usage
 
 ```bash
@@ -42,12 +48,6 @@ You must pass an `src` property with the link of the image:
 ```
 
 That image will be loaded as soon as the image enters the viewport.
-
-## Lazy Loading at the Browser-Level
-
-v-image is detects support for browser-level lazy loading and uses it as default. If browser-level lazy loading is not supported by browser fallback is Intersection Observer.
-
-More information on: https://web.dev/native-lazy-loading/
 
 ## Progressive Loading
 
