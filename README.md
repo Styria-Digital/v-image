@@ -1,3 +1,9 @@
+# v-image
+
+A Vue.js component to lazy load an image automatically when it enters the viewport using lazy Loading at the Browser-Level or as fallback [Intersection Observer API](https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API).
+
+Plugin is inspired by [v-lazy-image](https://github.com/alexjoverm/v-lazy-image).
+
 ## Usage
 
 ```bash
