@@ -44,7 +44,8 @@
                 default: ''
             },
             alt: {
-                type: String
+                type: String,
+                default: ''
             },
             intersectionOptions: {
                 type: Object,
