@@ -39,11 +39,15 @@ export default {
         },
         intersectionOptions: {
             type: Object,
-            default: () => {}
+            default: () => ({})
         },
         usePicture: {
             type: Boolean,
             default: false
+        },
+        useLazy: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -56,9 +60,15 @@ export default {
 
     computed: {
         imageSrc () {
-            return this.nativeLazy
-                ? this.src
-                : this.intersected && this.src ? this.src : this.srcPlaceholder;
+            if (this.useLazy) {
+                return (this.nativeLazy || this.intersected) && this.src
+                    ? this.src
+                    : this.srcPlaceholder;
+            } else {
+                return this.src
+                    ? this.src
+                    : this.srcPlaceholder;
+            }
         }
     },
 
@@ -75,23 +85,26 @@ export default {
     },
 
     mounted () {
-        if ('loading' in HTMLImageElement.prototype) {
-            this.nativeLazy = true;
-        } else if ('IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver(entries => {
-                const image = entries[0];
-                if (image.isIntersecting) {
-                    this.intersected = true;
-                    this.observer.disconnect();
-                    this.$emit('intersect');
-                }
-            }, this.intersectionOptions);
-            this.observer.observe(this.$el);
+        if (this.useLazy) {
+            if ('loading' in HTMLImageElement.prototype) {
+                this.nativeLazy = true;
+            } else if ('IntersectionObserver' in window) {
+                this.observer = new IntersectionObserver(entries => {
+                    const image = entries[0];
+                    if (image.isIntersecting) {
+                        this.intersected = true;
+                        this.observer.unobserve(this.$el);
+                        this.observer.disconnect();
+                        this.$emit('intersect');
+                    }
+                }, this.intersectionOptions);
+                this.observer.observe(this.$el);
+            }
         }
     },
 
-    destroyed () {
-        if (!this.nativeLazy && 'IntersectionObserver' in window) {
+    beforeDestroy () {
+        if (this.useLazy && !this.nativeLazy && 'IntersectionObserver' in window) {
             this.observer.disconnect();
         }
     }

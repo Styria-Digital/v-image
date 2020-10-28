@@ -45,11 +45,15 @@
             },
             intersectionOptions: {
                 type: Object,
-                default: function () {}
+                default: function () { return ({}); }
             },
             usePicture: {
                 type: Boolean,
                 default: false
+            },
+            useLazy: {
+                type: Boolean,
+                default: true
             }
         },
 
@@ -62,9 +66,15 @@
 
         computed: {
             imageSrc: function imageSrc () {
-                return this.nativeLazy
-                    ? this.src
-                    : this.intersected && this.src ? this.src : this.srcPlaceholder;
+                if (this.useLazy) {
+                    return (this.nativeLazy || this.intersected) && this.src
+                        ? this.src
+                        : this.srcPlaceholder;
+                } else {
+                    return this.src
+                        ? this.src
+                        : this.srcPlaceholder;
+                }
             }
         },
 
@@ -83,23 +93,26 @@
         mounted: function mounted () {
             var this$1 = this;
 
-            if ('loading' in HTMLImageElement.prototype) {
-                this.nativeLazy = true;
-            } else if ('IntersectionObserver' in window) {
-                this.observer = new IntersectionObserver(function (entries) {
-                    var image = entries[0];
-                    if (image.isIntersecting) {
-                        this$1.intersected = true;
-                        this$1.observer.disconnect();
-                        this$1.$emit('intersect');
-                    }
-                }, this.intersectionOptions);
-                this.observer.observe(this.$el);
+            if (this.useLazy) {
+                if ('loading' in HTMLImageElement.prototype) {
+                    this.nativeLazy = true;
+                } else if ('IntersectionObserver' in window) {
+                    this.observer = new IntersectionObserver(function (entries) {
+                        var image = entries[0];
+                        if (image.isIntersecting) {
+                            this$1.intersected = true;
+                            this$1.observer.unobserve(this$1.$el);
+                            this$1.observer.disconnect();
+                            this$1.$emit('intersect');
+                        }
+                    }, this.intersectionOptions);
+                    this.observer.observe(this.$el);
+                }
             }
         },
 
-        destroyed: function destroyed () {
-            if (!this.nativeLazy && 'IntersectionObserver' in window) {
+        beforeDestroy: function beforeDestroy () {
+            if (this.useLazy && !this.nativeLazy && 'IntersectionObserver' in window) {
                 this.observer.disconnect();
             }
         }
