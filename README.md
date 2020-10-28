@@ -131,7 +131,7 @@ _Fields marked as (\*) are required._
 | `src-placeholder`      | String        | ' '           | If defined, it will be shown until the `src` image is loaded.  |
 | `intersection-options` | Object        | () => ({})    | The [Intersection Observer options object](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer). |
 | `use-picture`          | Boolean       | false         | Wrap the img in a picture tag. |
-| `use-lazy`          | Boolean       | true         | v-image by default uses lazy loading techniques, but you can turn off lazy loading |
+| `use-lazy`          | Boolean       | true         | Turn off lazy loading |
 
 ### Events
 
