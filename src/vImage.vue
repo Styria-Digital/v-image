@@ -3,9 +3,12 @@
     <picture v-if="usePicture">
         <slot />
         <img
-            v-if="!imageLoaded"
-            :src="srcPlaceholder"
+            :src="imageSrc"
             :alt="alt"
+            :loading="this.nativeLazy ? 'lazy' : ''"
+            :class="{ 'is-loaded': this.imageLoaded }"
+            @load="load"
+            @error="error"
         >
     </picture>
 

@@ -21,6 +21,9 @@
 //
 //
 //
+//
+//
+//
 
 var script = {
     name: 'vImage',
@@ -201,9 +204,15 @@ var __vue_render__ = function() {
         [
           _vm._t("default"),
           _vm._v(" "),
-          !_vm.imageLoaded
-            ? _c("img", { attrs: { src: _vm.srcPlaceholder, alt: _vm.alt } })
-            : _vm._e()
+          _c("img", {
+            class: { "is-loaded": this.imageLoaded },
+            attrs: {
+              src: _vm.imageSrc,
+              alt: _vm.alt,
+              loading: this.nativeLazy ? "lazy" : ""
+            },
+            on: { load: _vm.load, error: _vm.error }
+          })
         ],
         2
       )
