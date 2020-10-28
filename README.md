@@ -127,7 +127,7 @@ _Fields marked as (\*) are required._
 | ---------------------- | ------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src`                  | String _(\*)_ |       -       | Image `src` to lazy load when it intersects with the viewport                                                                                             |
 | `src-placeholder`      | String        | ' '           | If defined, it will be shown until the `src` image is loaded.  |
-| `alt`          | String       | ''         | img alt attribute |
+| `alt`          | String       | ' '         | img alt attribute |
 | `intersection-options` | Object        | () => ({})    | The [Intersection Observer options object](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Creating_an_intersection_observer). |
 | `use-picture`          | Boolean       | false         | Wrap the img in a picture tag. |
 | `use-lazy`          | Boolean       | true         | Turn off lazy loading |
