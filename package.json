@@ -1,14 +1,14 @@
 {
     "name": "v-image",
     "version": "1.0.0",
-    "description": "Vue.js plugin for img and picture HTML elements with support for native lazy loading, and lazy loading using intersection observer",
+    "description": "Vue.js plugin for img and picture HTML elements with support for browser-level lazy loading, and lazy loading using Intersection Observer API as fallback",
     "main": "dist/v-image.umd.js",
     "module": "dist/v-image.esm.js",
     "unpkg": "dist/v-image.min.js",
     "browser": {
         "./sfc": "src/v-image.vue"
     },
-    "private": true,
+    "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
@@ -19,7 +19,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/marko-matic/v-image.git"
+        "url": "git+https://github.com/Styria-Digital/v-image.git"
     },
     "keywords": [
         "vue",
@@ -33,9 +33,9 @@
     "author": "Styria Digital / Marko Matic",
     "license": "SEE LICENSE IN LICENSE",
     "bugs": {
-        "url": "https://github.com/marko-matic/v-image/issues"
+        "url": "https://github.com/Styria-Digital/v-image/issues"
     },
-    "homepage": "https://github.com/marko-matic/v-image",
+    "homepage": "https://github.com/Styria-Digital/v-image",
     "dependencies": {
         "core-js": "^3.6.5",
         "rollup": "^1.32.1",
