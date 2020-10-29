@@ -26,7 +26,7 @@
 //
 
 var script = {
-    name: 'vImage',
+    name: 'vPhoto',
 
     props: {
         src: {
@@ -262,7 +262,7 @@ __vue_render__._withStripped = true;
 function install (Vue) {
     if (install.installed) { return; }
     install.installed = true;
-    Vue.component('vImage', __vue_component__);
+    Vue.component('vPhoto', __vue_component__);
 }
 
 var plugin = {

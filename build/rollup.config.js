@@ -6,7 +6,7 @@ export default {
     input: 'src/entry.js',
 
     output: {
-        name: 'vImage',
+        name: 'vPhoto',
         exports: 'named',
     },
 

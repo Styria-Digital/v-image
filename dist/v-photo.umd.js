@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global.vImage = {}));
+    (global = global || self, factory(global.vPhoto = {}));
 }(this, (function (exports) { 'use strict';
 
     //
@@ -32,7 +32,7 @@
     //
 
     var script = {
-        name: 'vImage',
+        name: 'vPhoto',
 
         props: {
             src: {
@@ -268,7 +268,7 @@
     function install (Vue) {
         if (install.installed) { return; }
         install.installed = true;
-        Vue.component('vImage', __vue_component__);
+        Vue.component('vPhoto', __vue_component__);
     }
 
     var plugin = {

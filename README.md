@@ -1,4 +1,4 @@
-# v-image
+# v-photo
 
 A Vue.js component to lazy load an image automatically when it enters the viewport using lazy Loading at the Browser-Level or as fallback [Intersection Observer API](https://developer.mozilla.org/docs/Web/API/Intersection_Observer_API).
 
@@ -6,14 +6,14 @@ Plugin is inspired by [v-lazy-image](https://github.com/alexjoverm/v-lazy-image)
 
 ## Lazy Loading at the Browser-Level
 
-v-image is detects support for browser-level lazy loading and uses it as default. If browser-level lazy loading is not supported by browser fallback is Intersection Observer.
+v-photo is detects support for browser-level lazy loading and uses it as default. If browser-level lazy loading is not supported by browser fallback is Intersection Observer.
 
 More information on: https://web.dev/native-lazy-loading/
 
 ## Usage
 
 ```bash
-npm install v-image
+npm install v-photo
 ```
 
 _**Warning:** You'll need to install the [w3c Intersection Observer polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill) in case you're targeting a browser which doesn't support it._
@@ -22,19 +22,19 @@ You can register the component globally so it's available in all your apps:
 
 ```js
 import Vue from "vue";
-import vImage from 'v-image';
+import vPhoto from 'v-photo';
 
-Vue.use(vImage);
+Vue.use(vPhoto);
 ```
 
 Or use it locally in any of your components:
 
 ```js
-import vImage from "v-image";
+import vPhoto from "v-photo";
 
 export default {
   components: {
-    vImage
+    vPhoto
   }
 };
 ```
@@ -43,7 +43,7 @@ You must pass an `src` property with the link of the image:
 
 ```html
 <template>
-  <v-image src="http://lorempixel.com/400/200/" />
+  <v-photo src="http://lorempixel.com/400/200/" />
 </template>
 ```
 
@@ -57,18 +57,18 @@ When the `src` image is loaded, a `is-loaded` class is added, so you can use it 
 
 ```html
 <template>
-  <v-image
+  <v-photo
     src="http://lorempixel.com/400/200/"
     src-placeholder="http://lorempixel.com/200/200/"
   />
 </template>
 
 <style scoped>
-.v-image {
+.v-photo {
   filter: blur(10px);
   transition: filter 0.7s;
 }
-.v-image.is-loaded {
+.v-photo.is-loaded {
   filter: blur(0);
 }
 </style>
@@ -76,7 +76,7 @@ When the `src` image is loaded, a `is-loaded` class is added, so you can use it 
 
 In case you are using Webpack bundler for images too (just like Vue-cli):
 ```html
-<v-image
+<v-photo
   src="http://lorempixel.com/400/200/"
   :src-placeholder="require('../assets/img.jpg')"
 />
@@ -86,7 +86,7 @@ You could listen to the `intersect` and `load` events for more complex animation
 
 ```html
 <template>
-  <v-image
+  <v-photo
     src="http://lorempixel.com/400/200/"
     src-placeholder="http://lorempixel.com/200/200/"
     @intersect="..."
@@ -102,13 +102,13 @@ You could listen to the `intersect` and `load` events for more complex animation
 If you want to wrap the `img` in a `picture` tag, use the prop `usePicture`. You can then use slots to add additional elements above the `img` element`.
 
 ```html
-<v-image
+<v-photo
   src="http://lorempixel.com/400/200/"
   alt="Fallback"
   use-picture
 >
   <source srcset="http://lorempixel.com/1680/1024/" media="(min-width: 1024px)" />
-</v-image>
+</v-photo>
 
 ```
 

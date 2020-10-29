@@ -1,25 +1,25 @@
 {
-    "name": "v-image",
+    "name": "v-photo",
     "version": "1.0.0",
     "description": "Vue.js plugin for img and picture HTML elements with support for browser-level lazy loading, and lazy loading using Intersection Observer API as fallback",
-    "main": "dist/v-image.umd.js",
-    "module": "dist/v-image.esm.js",
-    "unpkg": "dist/v-image.min.js",
+    "main": "dist/v-photo.umd.js",
+    "module": "dist/v-photo.esm.js",
+    "unpkg": "dist/v-photo.min.js",
     "browser": {
-        "./sfc": "src/v-image.vue"
+        "./sfc": "src/v-photo.vue"
     },
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-image.umd.js",
-        "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-image.esm.js",
-        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-image.min.js",
+        "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/v-photo.umd.js",
+        "build:es": "rollup --config build/rollup.config.js --format es --file dist/v-photo.esm.js",
+        "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/v-photo.min.js",
         "lint": "vue-cli-service lint"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Styria-Digital/v-image.git"
+        "url": "git+https://github.com/Styria-Digital/v-photo.git"
     },
     "keywords": [
         "vue",
@@ -33,9 +33,9 @@
     "author": "Styria Digital / Marko Matic",
     "license": "SEE LICENSE IN LICENSE",
     "bugs": {
-        "url": "https://github.com/Styria-Digital/v-image/issues"
+        "url": "https://github.com/Styria-Digital/v-photo/issues"
     },
-    "homepage": "https://github.com/Styria-Digital/v-image",
+    "homepage": "https://github.com/Styria-Digital/v-photo",
     "dependencies": {
         "core-js": "^3.6.5",
         "rollup": "^1.32.1",

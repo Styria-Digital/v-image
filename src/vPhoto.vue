@@ -26,7 +26,7 @@
 
 <script>
 export default {
-    name: 'vImage',
+    name: 'vPhoto',
 
     props: {
         src: {

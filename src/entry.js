@@ -1,10 +1,10 @@
-import component from './vImage.vue';
+import component from './vPhoto.vue';
 
 
 function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('vImage', component);
+    Vue.component('vPhoto', component);
 }
 
 const plugin = {
